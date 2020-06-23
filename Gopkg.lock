@@ -9,9 +9,28 @@
   revision = "75dcda0896e109a2a22c9315bca3bb21b87b2ba5"
   version = "v1.7.4"
 
+[[projects]]
+  digest = "1:2e855e1d368e7ac5c722c34148021e7e8fe5521329362deb0c5376a85971832e"
+  name = "github.com/jinzhu/gorm"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "7cc9c13f20d9d41d10a2bc2888271fd723c1a567"
+  version = "v1.9.14"
+
+[[projects]]
+  digest = "1:01ed62f8f4f574d8aff1d88caee113700a2b44c42351943fa73cc1808f736a50"
+  name = "github.com/jinzhu/inflection"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f5c5f50e6090ae76a29240b61ae2a90dd810112e"
+  version = "v1.0.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/gorilla/mux"]
+  input-imports = [
+    "github.com/gorilla/mux",
+    "github.com/jinzhu/gorm",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
