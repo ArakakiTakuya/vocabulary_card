@@ -4,6 +4,7 @@ import (
 	"fmt"
     "log"
 	"net/http"
+	"encoding/json"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -13,14 +14,13 @@ var db *gorm.DB
 var err error
 
 type Word struct{
-	gorm.Model
 	En_meaning string
 	Ja_meaning string
 	Level string
 }
 
 func InitialMigration(){
-	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm sslmode=disable")
+	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm2 sslmode=disable")
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -31,18 +31,26 @@ func InitialMigration(){
 	
 	db.AutoMigrate(&Word{})
 
-
     fmt.Println("Connection to Postgres was successful!")
 }
 
-func getWords(w http.ResponseWriter, r *http.Request){
-	fmt.Fprintf(w,"hello world")
+func allWords(w http.ResponseWriter, r *http.Request){
+	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm2 sslmode=disable")
+	if err != nil {
+		fmt.Println(err.Error())
+        panic("Failed to connect to database")
+    }
+	defer db.Close()
+
+	var words []Word
+	db.Find(&words)
+	json.NewEncoder(w).Encode(words)
 }
 
 func main()  {
 	InitialMigration()
 	 r := mux.NewRouter() 
-	 r.HandleFunc("/api/words", getWords).Methods("GET")
+	 r.HandleFunc("/api/words", allWords).Methods("GET")
 	 r.PathPrefix("/").Handler(http.FileServer(http.Dir("build")))
 	 // 4000ポートでサーバーを立ち上げる
 	 log.Println("Listening...")
