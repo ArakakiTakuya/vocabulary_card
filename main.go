@@ -2,16 +2,15 @@ package main
 
 import (
     "log"
-    "net/http"
+	"net/http"
+	"github.com/gorilla/mux"
 )
 
 func main()  {
-	 //ディレクトリを指定する
-	 fs := http.FileServer(http.Dir("build"))
-	 //ルーティング設定。"/"というアクセスがきたらstaticディレクトリのコンテンツを表示させる
-	 http.Handle("/", fs)
- 
+	 r := mux.NewRouter() 
+	 r.HandleFunc("/api/words", getWords).Methods("GET")
+	 r.PathPrefix("/").Handler(http.FileServer(http.Dir("build")))
 	 log.Println("Listening...")
 	 // 4000ポートでサーバーを立ち上げる
-	 http.ListenAndServe(":4000", nil)
+	 log.Fatal(http.ListenAndServe(":4000", r))
 }
