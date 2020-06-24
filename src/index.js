@@ -18,6 +18,11 @@ function reducer(state = initialState, action) {
         ...state,
         words: action.words,
       };
+    case "SET_OPEN_STATUS":
+      return {
+        ...state,
+        openStatus: action.openStatus,
+      };
     default:
       return state;
   }
