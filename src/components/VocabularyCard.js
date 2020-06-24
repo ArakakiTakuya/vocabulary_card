@@ -1,16 +1,27 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+import WordCard from "./WordCard";
+
+import "./VocabularyCard.css";
 
 const VocabularyCard = () => {
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 0 },
+      items: 1,
+    },
+  };
   const words = useSelector((state) => state.words);
   return (
-    <div className="vocabulary_card_container">
-      {words.map((word, i) => (
-        <div className="vocabulary_card" key={i}>
-          <p>{word.En_meaning}</p>
-          <p>{word.Ja_meaning}</p>
-        </div>
-      ))}
+    <div className="vocabulary-card-container">
+      <Carousel responsive={responsive}>
+        {words.map((word, i) => (
+          <WordCard word={word} key={i} />
+        ))}
+      </Carousel>
     </div>
   );
 };
