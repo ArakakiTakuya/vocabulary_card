@@ -2,8 +2,13 @@ h2 {
   margin-left: 25px;
 }
 
-.paper {
-  margin: 15px 350px;
+.vocabulary_list > * {
+  display: block;
+  margin: 20px auto;
+}
+
+.vocabulary_list .paper {
+  width: 55%;
   display: flex;
   position: relative;
 }
@@ -14,5 +19,11 @@ h4 {
 
 h5 {
   position: absolute;
-  left: 300px;
+  left: 350px;
+  /*margin-left: 20px;*/
+}
+
+.btn {
+  text-align: center;
+  margin: 50px;
 }
