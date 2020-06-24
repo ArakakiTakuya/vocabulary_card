@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Paper } from "@material-ui/core";
@@ -9,6 +9,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import "./VocabularyList.css";
 
@@ -33,6 +35,11 @@ const VocabularyList = () => {
           <Paper variant="outlined" square className="paper" key={i}>
             <h4>{word.En_meaning}</h4>
             <h5> {word.Ja_meaning}</h5>
+            <div class="delete_btn">
+              <IconButton aria-label="delete" disabled color="primary">
+                <DeleteIcon />
+              </IconButton>
+            </div>
           </Paper>
         ))}
       </div>

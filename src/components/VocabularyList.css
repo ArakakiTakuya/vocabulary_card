@@ -10,7 +10,7 @@ h2 {
 .vocabulary_list .paper {
   width: 55%;
   display: flex;
-  position: relative;
+  align-items: center;
 }
 
 h4 {
@@ -18,9 +18,11 @@ h4 {
 }
 
 h5 {
-  position: absolute;
-  left: 350px;
-  /*margin-left: 20px;*/
+  margin: 0 0 0 auto;
+}
+
+.delete_btn {
+  margin: 0 0 0 auto;
 }
 
 .btn {
