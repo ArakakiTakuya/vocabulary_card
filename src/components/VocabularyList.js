@@ -13,6 +13,7 @@ const VocabularyList = () => {
       {words.map((word, i) => (
         <Paper variant="outlined" square className="paper" key={i}>
           <h4>{word.En_meaning}</h4>
+          <h5> {word.Ja_meaning}</h5>
         </Paper>
       ))}
     </div>

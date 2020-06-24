@@ -3,9 +3,16 @@ h2 {
 }
 
 .paper {
-  margin: 15px 150px;
+  margin: 15px 350px;
+  display: flex;
+  position: relative;
 }
 
 h4 {
-  margin-left: 25px;
+  margin-left: 35px;
+}
+
+h5 {
+  position: absolute;
+  left: 300px;
 }
