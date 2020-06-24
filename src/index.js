@@ -13,6 +13,11 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case "SET_WORDS":
+      return {
+        ...state,
+        words: action.words,
+      };
     default:
       return state;
   }
