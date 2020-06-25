@@ -48,6 +48,21 @@ func allWords(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(words)
 }
 
+func newWord(w http.ResponseWriter, r *http.Request){
+	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm4 sslmode=disable")
+	if err != nil {
+		fmt.Println(err.Error())
+        panic("Failed to connect to database")
+    }
+	defer db.Close()
+
+	var word Word
+	json.NewDecoder(r.Body).Decode(&word)
+	db.Create(&word)
+
+	fmt.Println("New word was successfully created")
+}
+
 func deleteWord(w http.ResponseWriter, r *http.Request){
 	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm4 sslmode=disable")
 	if err != nil {
@@ -70,6 +85,7 @@ func main()  {
 	InitialMigration()
 	 r := mux.NewRouter() 
 	 r.HandleFunc("/api/words", allWords).Methods("GET")
+	 r.HandleFunc("/api/words", newWord).Methods("POST")
 	 r.HandleFunc("/api/words/{id}", deleteWord).Methods("DELETE")
 	 r.PathPrefix("/").Handler(http.FileServer(http.Dir("build")))
 	 // 4000ポートでサーバーを立ち上げる
