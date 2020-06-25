@@ -11,6 +11,8 @@ const initialState = {
   words: [],
   openStatus: false,
   btnType: "",
+  targetWordId: "",
+  targetWord: {},
 };
 
 function reducer(state = initialState, action) {
@@ -26,6 +28,18 @@ function reducer(state = initialState, action) {
         openStatus: action.openStatus,
         btnType: action.btnType,
       };
+    case "SET_TARGET_WORD_ID":
+      return {
+        ...state,
+        targetWordId: action.targetWordId,
+      };
+    /* 
+    case "SET_TARGET_WORD":
+      return {
+        ...state,
+        targetWord: state.words[action.targetWord],
+      };
+      */
     default:
       return state;
   }

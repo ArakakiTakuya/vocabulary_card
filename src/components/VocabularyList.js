@@ -17,11 +17,13 @@ import "./VocabularyList.css";
 const VocabularyList = () => {
   const dispatch = useDispatch();
   const words = useSelector((state) => state.words);
+  const targetWordId = useSelector((state) => state.targetWordId);
   const openStatus = useSelector((state) => state.openStatus);
   const btnType = useSelector((state) => state.btnType);
 
-  const handleClickOpen = (btnType) => {
+  const handleClickOpen = (btnType, targetWordId) => {
     dispatch({ type: "SET_OPEN_STATUS", openStatus: true, btnType: btnType });
+    dispatch({ type: "SET_TARGET_WORD_ID", targetWordId: targetWordId });
   };
 
   const handleClose = () => {
@@ -32,14 +34,19 @@ const VocabularyList = () => {
     <>
       <h2>収録単語一覧({words.length})</h2>
       <div className="vocabulary_list">
-        {words.map((word) => (
+        {words.map((word, i) => (
           <Paper variant="outlined" square className="paper" key={word.Id}>
             <h4>{word.En_meaning}</h4>
             <h5> {word.Ja_meaning}</h5>
-            <div class="delete_btn">
+            <div class="delete_btn" idx={i} id={word.Id}>
               <IconButton
                 aria-label="delete"
-                onClick={() => handleClickOpen("delete")}
+                onClick={(e) => {
+                  const targetWordId = e.currentTarget.parentNode.getAttribute(
+                    "id"
+                  );
+                  handleClickOpen("delete", targetWordId);
+                }}
               >
                 <DeleteIcon />
               </IconButton>
@@ -65,7 +72,15 @@ const VocabularyList = () => {
             <Button onClick={handleClose} color="primary">
               No
             </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button
+              onClick={() => {
+                fetch(`/api/words/${targetWordId}`, {
+                  method: "DELETE",
+                });
+                handleClose();
+              }}
+              color="primary"
+            >
               Yes
             </Button>
           </DialogActions>
