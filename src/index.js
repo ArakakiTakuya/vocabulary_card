@@ -9,6 +9,8 @@ import * as serviceWorker from "./serviceWorker";
 
 const initialState = {
   words: [],
+  openStatus: false,
+  btnType: "",
 };
 
 function reducer(state = initialState, action) {
@@ -22,6 +24,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         openStatus: action.openStatus,
+        btnType: action.btnType,
       };
     default:
       return state;

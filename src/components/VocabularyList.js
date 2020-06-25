@@ -18,13 +18,14 @@ const VocabularyList = () => {
   const dispatch = useDispatch();
   const words = useSelector((state) => state.words);
   const openStatus = useSelector((state) => state.openStatus);
+  const btnType = useSelector((state) => state.btnType);
 
-  const handleClickOpen = () => {
-    dispatch({ type: "SET_OPEN_STATUS", openStatus: true });
+  const handleClickOpen = (btnType) => {
+    dispatch({ type: "SET_OPEN_STATUS", openStatus: true, btnType: btnType });
   };
 
   const handleClose = () => {
-    dispatch({ type: "SET_OPEN_STATUS", openStatus: false });
+    dispatch({ type: "SET_OPEN_STATUS", openStatus: false, btnType: "" });
   };
 
   return (
@@ -36,7 +37,10 @@ const VocabularyList = () => {
             <h4>{word.En_meaning}</h4>
             <h5> {word.Ja_meaning}</h5>
             <div class="delete_btn">
-              <IconButton aria-label="delete" disabled color="primary">
+              <IconButton
+                aria-label="delete"
+                onClick={() => handleClickOpen("delete")}
+              >
                 <DeleteIcon />
               </IconButton>
             </div>
@@ -44,18 +48,37 @@ const VocabularyList = () => {
         ))}
       </div>
       <div className="btn">
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleClickOpen("add")}
+        >
           Add new word
         </Button>
+      </div>
+      <>
+        <Dialog open={btnType === "delete" && openStatus} onClose={handleClose}>
+          <DialogContent>
+            <DialogContentText>この単語を消去しますか？</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              No
+            </Button>
+            <Button onClick={handleClose} color="primary">
+              Yes
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Dialog
-          open={openStatus}
+          open={btnType === "add" && openStatus}
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Let's add new word !</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              追加したい単語とその訳と日本語訳を記入してください。
+              追加したい単語とその日本語訳を記入してください。
             </DialogContentText>
             <TextField
               autoFocus
@@ -83,7 +106,7 @@ const VocabularyList = () => {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </>
     </>
   );
 };
