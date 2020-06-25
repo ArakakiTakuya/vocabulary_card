@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import uuid from "react-uuid";
 
 import { Paper } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -20,6 +21,8 @@ const VocabularyList = () => {
   const targetWordId = useSelector((state) => state.targetWordId);
   const openStatus = useSelector((state) => state.openStatus);
   const btnType = useSelector((state) => state.btnType);
+  const inputWord = useSelector((state) => state.inputWord);
+  const inputMeaning = useSelector((state) => state.inputMeaning);
 
   const handleClickOpen = (btnType, targetWordId) => {
     dispatch({ type: "SET_OPEN_STATUS", openStatus: true, btnType: btnType });
@@ -100,27 +103,54 @@ const VocabularyList = () => {
               追加したい単語とその日本語訳を記入してください。
             </DialogContentText>
             <TextField
-              autoFocus
               margin="dense"
               id="name"
               label="単語"
-              type="email"
               fullWidth
+              onChange={(e) => {
+                dispatch({ type: "SET_INPUT_WORD", inputWord: e.target.value });
+              }}
             />
             <TextField
-              autoFocus
               margin="dense"
               id="name"
               label="日本語訳"
-              type="email"
               fullWidth
+              onChange={(e) => {
+                dispatch({
+                  type: "SET_INPUT_MEANING",
+                  inputMeaning: e.target.value,
+                });
+              }}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button
+              onClick={() => {
+                const data = {
+                  Id: uuid(),
+                  En_meaning: inputWord,
+                  Ja_meaning: inputMeaning,
+                  Level: "basic",
+                };
+                fetch("/api/words", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                });
+                dispatch({
+                  type: "ADD_NEW_WORD",
+                  newWord: data,
+                });
+                handleClose();
+              }}
+              color="primary"
+            >
               Subscribe
             </Button>
           </DialogActions>

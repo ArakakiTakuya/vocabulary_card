@@ -12,9 +12,12 @@ const initialState = {
   openStatus: false,
   btnType: "",
   targetWordId: "",
+  inputWord: "",
+  inputMeaning: "",
 };
 
 function reducer(state = initialState, action) {
+  const copy = [...state.words];
   switch (action.type) {
     case "SET_WORDS":
       return {
@@ -33,13 +36,28 @@ function reducer(state = initialState, action) {
         targetWordId: action.targetWordId,
       };
     case "DELETE_TARGET_WORD":
-      const copy = [...state.words];
       const newWordsArray = copy.filter(
         (word) => String(word.Id) !== action.targetWordId
       );
       return {
         ...state,
         words: newWordsArray,
+      };
+    case "ADD_NEW_WORD":
+      copy.push(action.newWord);
+      return {
+        ...state,
+        words: copy,
+      };
+    case "SET_INPUT_WORD":
+      return {
+        ...state,
+        inputWord: action.inputWord,
+      };
+    case "SET_INPUT_MEANING":
+      return {
+        ...state,
+        inputMeaning: action.inputMeaning,
       };
     default:
       return state;
