@@ -32,8 +32,8 @@ const VocabularyList = () => {
     <>
       <h2>収録単語一覧({words.length})</h2>
       <div className="vocabulary_list">
-        {words.map((word, i) => (
-          <Paper variant="outlined" square className="paper" key={i}>
+        {words.map((word) => (
+          <Paper variant="outlined" square className="paper" key={word.Id}>
             <h4>{word.En_meaning}</h4>
             <h5> {word.Ja_meaning}</h5>
             <div class="delete_btn">

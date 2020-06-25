@@ -14,13 +14,14 @@ var db *gorm.DB
 var err error
 
 type Word struct{
+	Id uint `gorm:"primary_key"`
 	En_meaning string
 	Ja_meaning string
 	Level string
 }
 
 func InitialMigration(){
-	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm2 sslmode=disable")
+	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm4 sslmode=disable")
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -35,7 +36,7 @@ func InitialMigration(){
 }
 
 func allWords(w http.ResponseWriter, r *http.Request){
-	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm2 sslmode=disable")
+	db, err := gorm.Open("postgres", "user=postgres password=Namahamu0225 dbname=gorm4 sslmode=disable")
 	if err != nil {
 		fmt.Println(err.Error())
         panic("Failed to connect to database")

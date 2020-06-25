@@ -18,8 +18,8 @@ const VocabularyCard = () => {
   return (
     <div className="vocabulary-card-container">
       <Carousel responsive={responsive}>
-        {words.map((word, i) => (
-          <WordCard word={word} key={i} />
+        {words.map((word) => (
+          <WordCard word={word} key={word.Id} />
         ))}
       </Carousel>
     </div>

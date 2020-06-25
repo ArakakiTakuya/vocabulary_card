@@ -10,9 +10,12 @@
   version = "v1.7.4"
 
 [[projects]]
-  digest = "1:2e855e1d368e7ac5c722c34148021e7e8fe5521329362deb0c5376a85971832e"
+  digest = "1:4d7a43a7325332aea95530d44aff121ef6f106613de0c7e8815d83fe83bc7496"
   name = "github.com/jinzhu/gorm"
-  packages = ["."]
+  packages = [
+    ".",
+    "dialects/postgres",
+  ]
   pruneopts = "UT"
   revision = "7cc9c13f20d9d41d10a2bc2888271fd723c1a567"
   version = "v1.9.14"
@@ -25,12 +28,35 @@
   revision = "f5c5f50e6090ae76a29240b61ae2a90dd810112e"
   version = "v1.0.0"
 
+[[projects]]
+  digest = "1:dceb268e78d2d9509d3a01843c5b3294629d5e74404b3904886d36540150531f"
+  name = "github.com/lib/pq"
+  packages = [
+    ".",
+    "hstore",
+    "oid",
+    "scram",
+  ]
+  pruneopts = "UT"
+  revision = "8ae9eeaa02388a26cd5586023a0c4166c021a83d"
+  version = "v1.7.0"
+
+[[projects]]
+  digest = "1:274f67cb6fed9588ea2521ecdac05a6d62a8c51c074c1fccc6a49a40ba80e925"
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
+  version = "v1.2.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/gorilla/mux",
     "github.com/jinzhu/gorm",
+    "github.com/jinzhu/gorm/dialects/postgres",
+    "github.com/satori/go.uuid",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
