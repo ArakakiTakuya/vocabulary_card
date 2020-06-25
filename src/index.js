@@ -12,7 +12,6 @@ const initialState = {
   openStatus: false,
   btnType: "",
   targetWordId: "",
-  targetWord: {},
 };
 
 function reducer(state = initialState, action) {
@@ -33,13 +32,15 @@ function reducer(state = initialState, action) {
         ...state,
         targetWordId: action.targetWordId,
       };
-    /* 
-    case "SET_TARGET_WORD":
+    case "DELETE_TARGET_WORD":
+      const copy = [...state.words];
+      const newWordsArray = copy.filter(
+        (word) => String(word.Id) !== action.targetWordId
+      );
       return {
         ...state,
-        targetWord: state.words[action.targetWord],
+        words: newWordsArray,
       };
-      */
     default:
       return state;
   }

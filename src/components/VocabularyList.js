@@ -77,6 +77,10 @@ const VocabularyList = () => {
                 fetch(`/api/words/${targetWordId}`, {
                   method: "DELETE",
                 });
+                dispatch({
+                  type: "DELETE_TARGET_WORD",
+                  targetWordId: targetWordId,
+                });
                 handleClose();
               }}
               color="primary"
