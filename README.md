@@ -1,68 +1,90 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Vocabulary Card
 
-## Available Scripts
+This was created during my time as a student at Code Chrysalis.<br>
+(これはコードクリサリスの生徒のときに作りました。)
 
-In the project directory, you can run:
+<img width="1438" alt="vocabulary_card_screenshot" src="https://user-images.githubusercontent.com/50431801/85829311-4f97a500-b7c5-11ea-9b82-94badd104c18.png">
 
-### `yarn start`
+## What is Vocabulary?
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Vocabulary is an app which helps software engineer to learn English word related to tech.
+You can add new word and delete the word you slected.
+You can learn words you added with slide card.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<br>
+(Vocabularyはソフトウェアエンジニアがテクニカルな英単語を学ぶのに役立つアプリです。<br>
+新しい単語を追加したり、指定した単語を消去したりすることができます。<br>
+自分で追加した単語をスライドカードを使って学ぶことができます。
+)
 
-### `yarn test`
+<br>
+<br>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technogoly
 
-### `yarn build`
+<img width="690" alt="Technology I used" src="https://user-images.githubusercontent.com/50431801/85829765-4c50e900-b7c6-11ea-8d30-f1f665f65aa6.png">
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+# Development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To clone and run this application, you'll need Git, Node.js (which comes with yarn) and Go, installed on your computer.
+<br><br>
+(このアプリをクローン、実行するために Git と node.js,Go が必要です。自身のコンピュータにインストールしてください。)
+<br><br>
 
-### `yarn eject`
+## Database
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This project assumes a Postgres database, also, this is not included in the package.json file and vendor folder(for Go package), so must be installed separately.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create a database.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br>
+(このプロジェクトはデータベースとしてPostgresを使うことを想定しています。また最初はpackage.jsonファイル,Goのパッケージ管理として使われるvendor folderが含まれていないので。インストールする必要があります。)
+<br><br>
+(データベースを作ってください。)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br><br>
 
-## Learn More
+## Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
+1. Clone this repository
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+$ git clone https://github.com/ArakakiTakuya/vocabulary_card
+```
 
-### Code Splitting
+<br>
+2. Go to the repository
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```
+$ cd vocabulary_card
+```
 
-### Analyzing the Bundle Size
+<br>
+3. Install dependencies
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```
+$ yarn
+```
 
-### Making a Progressive Web App
+```
+$ dep install
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+<br>
+4. Create database, and rewrote database info in main.go
 
-### Advanced Configuration
+```
+gorm.Open("postgres", "user=YOUR POSTGRESQL USERNAME password=YOUR DATABASE PASSWORD dbname=YOUR DATABASE NAME YOU CREATED sslmode=disable")
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+<br>
+6. Run the app
 
-### Deployment
+```
+$ yarn start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+<br>
